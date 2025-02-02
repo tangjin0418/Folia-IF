@@ -18,6 +18,7 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.tjdev.util.tjpluginutil.spigot.FoliaUtil;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -84,7 +85,7 @@ public class GuiListener implements Listener {
         gui.click(event);
 
         if (event.isCancelled()) {
-            Bukkit.getScheduler().runTask(this.plugin, () -> {
+            FoliaUtil.scheduler.runTask(event.getWhoClicked(), () -> {
                 PlayerInventory playerInventory = event.getWhoClicked().getInventory();
 
                 /* due to a client issue off-hand items appear as ghost items, this updates the off-hand correctly
@@ -375,7 +376,7 @@ public class GuiListener implements Listener {
             }
 
             //Bukkit doesn't like it if you open an inventory while the previous one is being closed
-            Bukkit.getScheduler().runTask(this.plugin, () -> gui.navigateToParent(humanEntity));
+            FoliaUtil.scheduler.runTask(humanEntity, () -> gui.navigateToParent(humanEntity));
         }
     }
 

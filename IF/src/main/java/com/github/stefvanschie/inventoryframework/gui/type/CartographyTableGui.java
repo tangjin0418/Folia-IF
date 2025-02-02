@@ -21,6 +21,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.tjdev.util.tjpluginutil.spigot.FoliaUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -236,7 +237,7 @@ public class CartographyTableGui extends NamedGui implements InventoryBased {
             cartographyTableInventory.sendItems(player, getTopItems());
         } else if (slot >= 0 && slot <= 2) {
             //the client rejects the output item if send immediately
-            Bukkit.getScheduler().runTask(super.plugin, () ->
+            FoliaUtil.scheduler.runTask(player, () ->
                     cartographyTableInventory.sendItems(player, getTopItems()));
 
             if (event.isCancelled()) {
